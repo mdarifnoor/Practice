@@ -63,6 +63,29 @@ void levelorder(TreeNode* root, vector<int> &values){
     }
 }
 
+vector<vector<int>> bfs(TreeNode* root){
+    if(root == nullptr) return {};
+    vector<vector<int>> arr;
+    queue<TreeNode*> q;
+    q.push(root);
+
+    while(!q.empty()){
+        int len = q.size();
+        vector<int> level;
+
+        for(int i = 0; i < len; i++){
+            TreeNode* temp = q.front();
+            q.pop();
+            if(temp -> left) q.push(temp -> left);
+            if(temp -> right) q.push(temp->right);
+            level.emplace_back(temp -> val);
+        }
+        arr.emplace_back(level);
+    }
+ 
+    return arr;
+}
+
 
 
 TreeNode* insertBST(TreeNode *root, int data){
